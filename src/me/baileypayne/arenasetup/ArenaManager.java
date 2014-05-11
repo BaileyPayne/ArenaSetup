@@ -14,6 +14,8 @@ import org.bukkit.entity.Player;
  */
 public class ArenaManager {
     
+    private ArenaSetup plugin;
+    
     private static ArenaManager am = new ArenaManager();
     
     //to get the arena manager
@@ -165,7 +167,7 @@ public class ArenaManager {
     //Loading Arenas
     public void loadArenas(){
         //config file
-        FileConfiguration fc = config;
+        FileConfiguration fc = plugin.getConfig();
         
         for(String keys: fc.getConfigurationSection("arenas").getKeys(false)){
             
@@ -173,24 +175,24 @@ public class ArenaManager {
             World world = Bukkit.getWorld("arenas." + keys + ".world");
             
             //Locations
-            double joinX = fc.getDouble("arenas." + "keys." + "lobbyX");
-            double joinY = fc.getDouble("arenas." + "keys." + "lobbyY");
-            double joinZ = fc.getDouble("arenas." + "keys." + "lobbyZ");
+            double joinX = fc.getDouble("arenas." + "keys." + ".lobbyX");
+            double joinY = fc.getDouble("arenas." + "keys." + ".lobbyY");
+            double joinZ = fc.getDouble("arenas." + "keys." + ".lobbyZ");
             Location lobbyLocation = new Location(world, joinX, joinY, joinZ);
             
-            double redX = fc.getDouble("arenas." + "keys." + "redX");
-            double redY = fc.getDouble("arenas." + "keys." + "redY");
-            double redZ = fc.getDouble("arenas." + "keys." + "redZ");
+            double redX = fc.getDouble("arenas." + "keys." + ".redX");
+            double redY = fc.getDouble("arenas." + "keys." + ".redY");
+            double redZ = fc.getDouble("arenas." + "keys." + ".redZ");
             Location redSpawn = new Location(world, redX, redY, redZ);
             
-            double blueX = fc.getDouble("arenas." + "keys." + "blueX");
-            double blueY = fc.getDouble("arenas." + "keys." + "blueY");
-            double blueZ = fc.getDouble("arenas." + "keys." + "blueZ");
+            double blueX = fc.getDouble("arenas." + "keys." + ".blueX");
+            double blueY = fc.getDouble("arenas." + "keys." + ".blueY");
+            double blueZ = fc.getDouble("arenas." + "keys." + ".blueZ");
             Location blueSpawn = new Location(world, blueX, blueY, blueZ);
             
-            double endX = fc.getDouble("arenas." + "keys." + "endX");
-            double endY = fc.getDouble("arenas." + "keys." + "endY");
-            double endZ = fc.getDouble("arenas." + "keys." + "endZ");
+            double endX = fc.getDouble("arenas." + "keys." + ".endX");
+            double endY = fc.getDouble("arenas." + "keys." + ".endY");
+            double endZ = fc.getDouble("arenas." + "keys." + ".endZ");
             Location endLocation = new Location(world, endX, endY, endZ);
  
  
@@ -205,32 +207,33 @@ public class ArenaManager {
         //arena object to represent it
         Arena arena = new Arena(arenaName, lobbyLocation, redSpawn, blueSpawn, endLocation, maxPlayers);
         
-        FileConfiguration fc = config;
+        FileConfiguration fc = plugin.getConfig();
         
         fc.set("arenas." + arenaName, null); //set name
         
         String path = "arenas." + arenaName + ".";
         
         //set other values
-        fc.set(path + "lobbyX", lobbyLocation.getX());
-        fc.set(path + "lobbyY", lobbyLocation.getY());
-        fc.set(path + "lobbyZ", lobbyLocation.getZ());
+        fc.set(path + ".lobbyX", lobbyLocation.getX());
+        fc.set(path + ".lobbyY", lobbyLocation.getY());
+        fc.set(path + ".lobbyZ", lobbyLocation.getZ());
         
-        fc.set(path + "redX", redSpawn.getX());
-        fc.set(path + "redY", redSpawn.getY());
-        fc.set(path + "redZ", redSpawn.getZ());
+        fc.set(path + ".redX", redSpawn.getX());
+        fc.set(path + ".redY", redSpawn.getY());
+        fc.set(path + ".redZ", redSpawn.getZ());
         
-        fc.set(path + "blueX", blueSpawn.getX());
-        fc.set(path + "blueY", blueSpawn.getY());
-        fc.set(path + "blueZ", blueSpawn.getZ());
+        fc.set(path + ".blueX", blueSpawn.getX());
+        fc.set(path + ".blueY", blueSpawn.getY());
+        fc.set(path + ".blueZ", blueSpawn.getZ());
         
-        fc.set(path + "endX", endLocation.getX());
-        fc.set(path + "endY", endLocation.getY());
-        fc.set(path + "endZ", endLocation.getZ());
+        fc.set(path + ".endX", endLocation.getX());
+        fc.set(path + ".endY", endLocation.getY());
+        fc.set(path + ".endZ", endLocation.getZ());
         
-        fc.set(path + "maxPlayers", maxPlayers);
+        fc.set(path + ".maxPlayers", maxPlayers);
         
         //need to save config
+        plugin.saveConfig();
     }
     
 }

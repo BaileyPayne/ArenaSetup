@@ -15,6 +15,33 @@ public class ArenaSetupCommands {
     
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
         Player player = (Player) sender;
+        
+        //Player Commands
+                
+                //join
+                if(commandLabel.equalsIgnoreCase("join")){
+                    ArenaManager.getManager().addPlayers(player, args[0]);
+                }
+                //leave
+                if(commandLabel.equalsIgnoreCase("leave")){
+                    ArenaManager.getManager().removePlayer(player, args[0]);
+                }
+                
+                //Admin Commands
+                
+                //start
+                if(player.hasPermission("arena.start")){
+                    if(commandLabel.equalsIgnoreCase("forcestart")){
+                        ArenaManager.getManager().startArena(args[0]);
+                    }
+                }
+                //stop
+                if(player.hasPermission("arena.end")){
+                    if(commandLabel.equalsIgnoreCase("forcestop")){
+                        ArenaManager.getManager().endArena(args[0]);
+                    }
+                }
+        
         //create arena + set name
         if(player.hasPermission("arena.create")){
                     if(commandLabel.equalsIgnoreCase("create")){
@@ -22,15 +49,6 @@ public class ArenaSetupCommands {
                         player.sendMessage("You Created the Arena named " + args[0]);
                     }
                 }
-        //set max players
-        //if(player.hasPermission("arena.set.maxplayers")){
-           //if(commandLabel.equalsIgnoreCase("setmaxp")){
-               // if(args[0] == plugin.getName()){
-                  //  plugin.setMaxPlayers(args[1]);
-                    player.sendMessage("You set the Max Players to " + args[1] + " in " + plugin.getName() + " Arena!");
-             //   }
-         //   }
-    //    }
         //set lobby location
         if(player.hasPermission("arena.set.lobby")){
             if(commandLabel.equalsIgnoreCase("setlobbyspawn")){

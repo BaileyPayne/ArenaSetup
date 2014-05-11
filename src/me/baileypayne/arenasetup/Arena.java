@@ -61,7 +61,7 @@ public class Arena {
     public Location getEndLocation(){
         return this.endLocation;
     }
-    public void setEndLocation(){
+    public void setEndLocation(Location endLocation){
         this.endLocation = endLocation;
     }
     //Get and Set Name

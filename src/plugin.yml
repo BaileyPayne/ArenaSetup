@@ -6,38 +6,29 @@ description: Mini Game shell, setting up arenas
 commands:
   join:
     description: Joins an arena
-    usage: /<command> [arena name]
   leave:
     description: Leaves an arena
-    usage: /<command> [arena name]
   forcestart:
     description: Forces an arena to start
     permission: arena.start
-    usage: /<command> [arena name]
   forcestop:
     description: Stops an arena
     permission: arena.end
-    usage: /<command> [arena name]
   create:
     description: creates an arena
     permission: arena.create
-    usage: /<command> [arena name]
   setlobbyspawn:
     description: sets the lobby spawn of an arena
     permission: arena.set.lobby
-    usage: /<command> [arena name]
   setredspawn:
     description: sets the red team spawn
     permission: arena.set.redspawn
-    usage: /<command> [arena name]
   setbluespawn:
     description: sets the blue team spawn
     permission: arena.set.bluespawn
-    usage: /<command> [arena name]
   setendloc:
     description: sets the end location of the game
     permission: arena.set.endloc
-    usage: /<command> [arena name]
 permissions:
   arena.start:
     description: starts arena

@@ -1,0 +1,63 @@
+name: ArenaSetup
+version: 1.0
+main: me.baileypayne.arenasetup.ArenaSetup
+author: Bailey Payne
+description: Mini Game shell, setting up arenas
+commands:
+  join:
+    description: Joins an arena
+    usage: /<command> [arena name]
+  leave:
+    description: Leaves an arena
+    usage: /<command> [arena name]
+  forcestart:
+    description: Forces an arena to start
+    permission: arena.start
+    usage: /<command> [arena name]
+  forcestop:
+    description: Stops an arena
+    permission: arena.end
+    usage: /<command> [arena name]
+  create:
+    description: creates an arena
+    permission: arena.create
+    usage: /<command> [arena name]
+  setlobbyspawn:
+    description: sets the lobby spawn of an arena
+    permission: arena.set.lobby
+    usage: /<command> [arena name]
+  setredspawn:
+    description: sets the red team spawn
+    permission: arena.set.redspawn
+    usage: /<command> [arena name]
+  setbluespawn:
+    description: sets the blue team spawn
+    permission: arena.set.bluespawn
+    usage: /<command> [arena name]
+  setendloc:
+    description: sets the end location of the game
+    permission: arena.set.endloc
+    usage: /<command> [arena name]
+permissions:
+  arena.start:
+    description: starts arena
+    default: op
+  arena.end:
+    description: ends arena
+    default: op
+  arena.create:
+    description: Creates arena
+    default: op
+  arena.set.lobby:
+    description: lets lobby spawn
+    default: op
+  arena.set.redspawn:
+    description: sets red spawn
+    default: op
+  arena.set.bluespawn:
+    description: sets blue spawn
+    default: op
+  arena.set.endloc:
+    description: sets end location
+    default: op
+  

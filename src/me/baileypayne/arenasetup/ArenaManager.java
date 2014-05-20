@@ -38,6 +38,10 @@ public class ArenaManager {
     public void addPlayers(Player player, String arenaName){
         if(getArena(arenaName) != null){ //if there is an arena under the name
             Arena arena = getArena(arenaName);
+            if(arena.getLobbyLocation() != null){
+            if(arena.getRedSpawn() != null){
+            if(arena.getBlueSpawn() != null){   
+            if(arena.getEndLocation() != null){    
             if(!arena.isFull()){ //if the arena isnt full
                 if(!arena.isInGame()){ //if the arena isnt ingame
                     //check complete, arena joinable
@@ -60,20 +64,15 @@ public class ArenaManager {
                         startArena(arenaName); //starts arena
                     }
                 }
-                else {
-                    //arena is in game
-                    player.sendMessage(ChatColor.RED + "This arena is in game!");
-                }
+                
             }
-            else{
-                //arena is full
-                player.sendMessage(ChatColor.RED + "This arena is full!");
-            }
+            
         }
-        else {
-            //arena doesnt exist
-            player.sendMessage(ChatColor.RED + "This arena doesn't exist!");
-        }
+        
+    }
+    }
+    }
+    }
     }
     //Method for Removing Players
     public void removePlayer(Player player, String arenaName){
@@ -202,10 +201,10 @@ public class ArenaManager {
             Arena arena = new Arena(keys, lobbyLocation, redSpawn, blueSpawn, endLocation, 17);
         }
     }
-    public void createArena(String arenaName, Location lobbyLocation, Location redSpawn, Location blueSpawn, Location endLocation, int maxPlayers){
+    public void createArena(String arenaName, int maxPlayers){
         
         //arena object to represent it
-        Arena arena = new Arena(arenaName, lobbyLocation, redSpawn, blueSpawn, endLocation, maxPlayers);
+        Arena arena = new Arena(arenaName, null, null, null, null, maxPlayers);
         
         FileConfiguration fc = plugin.getConfig();
         
@@ -213,27 +212,58 @@ public class ArenaManager {
         
         String path = "arenas." + arenaName + ".";
         
-        //set other values
-        fc.set(path + ".lobbyX", lobbyLocation.getX());
-        fc.set(path + ".lobbyY", lobbyLocation.getY());
-        fc.set(path + ".lobbyZ", lobbyLocation.getZ());
-        
-        fc.set(path + ".redX", redSpawn.getX());
-        fc.set(path + ".redY", redSpawn.getY());
-        fc.set(path + ".redZ", redSpawn.getZ());
-        
-        fc.set(path + ".blueX", blueSpawn.getX());
-        fc.set(path + ".blueY", blueSpawn.getY());
-        fc.set(path + ".blueZ", blueSpawn.getZ());
-        
-        fc.set(path + ".endX", endLocation.getX());
-        fc.set(path + ".endY", endLocation.getY());
-        fc.set(path + ".endZ", endLocation.getZ());
-        
+        //set max players        
         fc.set(path + ".maxPlayers", maxPlayers);
         
         //need to save config
         plugin.saveConfig();
     }
-    
+    public void setLobbyLocation(String arenaName, Location lobbyLocation){
+        FileConfiguration fc = plugin.getConfig();
+        String path = "arenas." + arenaName + ".";
+        fc.set(path + ".lobbyX", lobbyLocation.getX());
+        fc.set(path + ".lobbyY", lobbyLocation.getY());
+        fc.set(path + ".lobbyZ", lobbyLocation.getZ());
+        Arena arena = getArena(arenaName);
+        arena.setLobbyLocation(lobbyLocation);
+        plugin.saveConfig();
+    }
+    public void setRedSpawn(String arenaName, Location redSpawn){
+        FileConfiguration fc = plugin.getConfig();
+        String path = "arenas." + arenaName + ".";
+        fc.set(path + ".redX", redSpawn.getX());
+        fc.set(path + ".redY", redSpawn.getY());
+        fc.set(path + ".redZ", redSpawn.getZ());
+        Arena arena = getArena(arenaName);
+        arena.setRedSpawn(redSpawn);
+        plugin.saveConfig();
+    }
+    public void setBlueSpawn(String arenaName, Location blueSpawn){
+        FileConfiguration fc = plugin.getConfig();
+        String path = "arenas." + arenaName + ".";
+        fc.set(path + ".blueX", blueSpawn.getX());
+        fc.set(path + ".blueY", blueSpawn.getY());
+        fc.set(path + ".blueZ", blueSpawn.getZ());
+        Arena arena = getArena(arenaName);
+        arena.setBlueSpawn(blueSpawn);
+        plugin.saveConfig();
+    }
+    public void setEndLocation(String arenaName, Location endLocation){
+        FileConfiguration fc = plugin.getConfig();
+        String path = "arenas." + arenaName + ".";
+        fc.set(path + ".endX", endLocation.getX());
+        fc.set(path + ".endY", endLocation.getY());
+        fc.set(path + ".endZ", endLocation.getZ());
+        Arena arena = getArena(arenaName);
+        arena.setEndLocation(endLocation);
+        plugin.saveConfig();
+    }
+    public void RemoveArena(Player player, String arenaName){
+        FileConfiguration fc = plugin.getConfig();
+        String path = "arenas." + arenaName;
+        fc.set(path, null);
+        plugin.saveConfig();
+        player.sendMessage("Arena Removed!");
+        Arena.arenaObjects.remove(getArena(arenaName));
+    }
 }
